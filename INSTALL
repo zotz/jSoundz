@@ -1,0 +1,9 @@
+install QT4
+
+install sox
+
+in the jSoundz directory:
+
+qmake -project
+qmake
+make
