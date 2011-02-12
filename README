@@ -1,0 +1,6 @@
+This is the README file for jSoundz, a jack SoundWall application.
+
+Currently, jSoundz has no jack abilities but rather uses sox to play sound files
+from disk.
+
+Hopefully, jack abilities will be added soon.
