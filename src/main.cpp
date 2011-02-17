@@ -81,7 +81,8 @@ int main(int argc, char *argv[])
   		else
   		{
   			// nothing
-  			qDebug() <<"We have a problem.";
+  			qDebug() <<"We have a problem. Wrong parameter passed in?";
+  			return 1;
  		}
 	}
   	else
@@ -99,7 +100,21 @@ int main(int argc, char *argv[])
   	  QString line = gin.readLine();
   	  // process_line(line);
   	  QStringList words = line.split(" ");
-  	  cfgmap.insert(words[0], words[1]);
+  	  int word_count = 0;
+  	  QString word1 = QString(NULL);
+  	  foreach(QString word, words)
+  	  {
+  	  	if (word_count > 0)
+  	  	{
+  	  		word1 = word1.append(word);
+  	  		word1 = word1.append(" ");
+  	  		qDebug() << "word is "<<word << "word1 is " << word1;
+ 	  	}
+ 	  	word_count++;
+ 	  }
+ 	  word1 = word1.trimmed();
+ 	  qDebug() << "Inserting to cfgmap: words[0] : " << words[0] << " and word1 : " << word1;
+  	  cfgmap.insert(words[0], word1);
 /*
   	  qDebug() << "line is: "<< line;
   	  qDebug() << "words(0) is: "<< words[0];

@@ -1,6 +1,54 @@
+jSoundz - a jack audio SoundWall.
+---------------------------------
+
 This is the README file for jSoundz, a jack SoundWall application.
 
 Currently, jSoundz has no jack abilities but rather uses sox to play sound files
 from disk.
 
 Hopefully, jack abilities will be added soon.
+
+Homepage: http://github.com/zotz/jSoundz/wiki
+
+License: GNU General Public License (GPL)
+
+See the LICENSE file.
+
+Currently version 2 of the License, or (at your option) any later version.
+
+I am thinking of taking it to version 3 or perhaps the agpl soon, so keep an eye
+out if this will bother you.
+
+Requirements
+------------
+
+QT4
+
+sox
+
+Installation
+------------
+
+qmake -project
+qmake
+make
+
+I have a lot to learn. Help and guidance appreciated.
+
+Configuration
+-------------
+
+Currently, jSoundz stores some config data in jsoundz.cfg or other config files
+that you may create.
+
+Bugs
+----
+
+Seriously, too may to guess at right now.
+
+drew Roberts
+zotzbro at gmail.com
+http://zotzbro.blogspot.com/
+http://freemusicpush.blogspot.com/
+http://zotz.kompoz.com
+http://packet-in.org/repo/user_drewRoberts/

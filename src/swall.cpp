@@ -115,7 +115,7 @@ Swall::Swall(QWidget *parent)
   for (int row=0; row<10; row++) {
     for (int col=0; col<10; col++) {
       SPushButton *btn = new SPushButton("", this);
-      qDebug() << "Making SPushButtons for the grid.";
+      // qDebug() << "Making SPushButtons for the grid.";
       btn->setFixedSize(115, 80);
       btn->setCheckable(1);
       // btn->setAutoDefault(false);
