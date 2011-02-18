@@ -51,6 +51,9 @@ class Swall : public QWidget
     void help();
     void about();
     void notes();
+  
+  signals:
+    void sbutconfig(QString butid, QString sndt, QString sndf);
 
 };
 

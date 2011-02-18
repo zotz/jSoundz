@@ -122,6 +122,7 @@ Swall::Swall(QWidget *parent)
       btn->setPalette( pal );
       QString sndt_key;
       QString some_sndt;
+      QString some_butid;
       // sndt_key = new QString("");
       some_sndt.append(QString("Cut::R"));
       some_sndt.append(QString("%1").arg(row));
@@ -130,6 +131,8 @@ Swall::Swall(QWidget *parent)
       sndt_key.append(QString("sndt"));
       sndt_key.append(QString("%1").arg(row));
       sndt_key.append(QString("%1").arg(col));
+      some_butid.append(QString("%1").arg(row));
+      some_butid.append(QString("%1").arg(col));
       some_sndt = cfgmap[sndt_key];
       QString sndf_key;
       QString some_sndf;
@@ -147,12 +150,15 @@ Swall::Swall(QWidget *parent)
       btn->setSndfKey(sndf_key);
       btn->setSndt(some_sndt);
       btn->setSndtKey(sndt_key);
+      btn->setButId(some_butid);
       btn->setProcId("00");
       btn->setText(btn->getSndt());
       btn->setPlayb(false);
       btn->setSndLoop(false);
       connect(btn, SIGNAL(clicked()),
   		btn, SLOT(processButton()));
+  	  connect(this, SIGNAL(sbutconfig(QString, QString, QString)),
+  		btn, SLOT(updateButConfig(QString, QString, QString)));
       grid->addWidget(btn, row, col);
 
     }
@@ -195,11 +201,12 @@ void Swall::loadconfig()
 {
   // we shall see
   qDebug() << "Load Config Button was clicked.";
+/*
   QMessageBox::about(this,"Load Config",
     "* This is going to take some refiguring. For now just load a config via the "
     "command line switch: '-c' ...\n");
+*/
 
-/*
   QString path;
 	
   path = QFileDialog::getOpenFileName(
@@ -228,7 +235,22 @@ void Swall::loadconfig()
   			  QString line = gin.readLine();
   			  // process_line(line);
   			  QStringList words = line.split(" ");
-  			  cfgmap.insert(words[0], words[1]);
+  			  int word_count = 0;
+  	  		  QString word1 = QString(NULL);
+  	  		  foreach(QString word, words)
+  	  		  {
+  	  			if (word_count > 0)
+  	  			{
+  	  				word1 = word1.append(word);
+  	  				word1 = word1.append(" ");
+  	  				// qDebug() << "word is "<<word << "word1 is " << word1;
+ 	  			}
+ 	  			word_count++;
+ 	  		  }
+ 	  		  word1 = word1.trimmed();
+ 	  		  // qDebug() << "Inserting to cfgmap: words[0] : " << words[0] << " and word1 : " << word1;
+  	  		  cfgmap.insert(words[0], word1);
+  			  // cfgmap.insert(words[0], words[1]);
 
   			}
   			file.close();
@@ -242,12 +264,34 @@ void Swall::loadconfig()
 
 		QMap<QString, QString>::const_iterator ii = cfgmap.constBegin();
 		while (ii != cfgmap.constEnd()) {
-		    qDebug() << ii.key() << ": " << ii.value();
+		    // qDebug() << ii.key() << ": " << ii.value();
 		    ++ii;
 		}
 
 	}
-*/
+	for (int row=0; row<10; row++) {
+		for (int col=0; col<10; col++) {
+			QString sndt_key;
+      		QString some_sndt;
+      		QString some_butid;
+      		// sndt_key = new QString("");
+      		sndt_key.append(QString("sndt"));
+      		sndt_key.append(QString("%1").arg(row));
+      		sndt_key.append(QString("%1").arg(col));
+      		some_butid.append(QString("%1").arg(row));
+      		some_butid.append(QString("%1").arg(col));
+      		some_sndt = cfgmap[sndt_key];
+      		QString sndf_key;
+      		QString some_sndf;
+      		// sndf_key = new QString("");
+      		sndf_key.append(QString("sndf"));
+      		sndf_key.append(QString("%1").arg(row));
+      		sndf_key.append(QString("%1").arg(col));
+      		some_sndf = cfgmap[sndf_key];
+      		emit sbutconfig(some_butid, some_sndt, some_sndf);
+     	}
+      }
+
 }
 
 

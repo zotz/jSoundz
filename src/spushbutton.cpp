@@ -118,6 +118,14 @@ void SPushButton::setProcId(const QString& setprocid)
     // qDebug() << m_procid;
 }
 
+void SPushButton::setButId(const QString& setbutid)
+{
+	// this will set the process id the button player
+	m_butid = setbutid;
+	qDebug() << "m_butid set to :";
+    qDebug() << m_butid;
+}
+
 void SPushButton::setPlayb(const bool& setplayb)
 {
 	// this will set a flag if the button file is playing or not
@@ -285,6 +293,18 @@ setSndf(newfile);
 }
 
 // ------------------
+
+void SPushButton::updateButConfig(QString butid, QString sndt, QString sndf)
+{
+	// qDebug() << "In SPushButton::updateButConfig.";
+	if (butid == m_butid) {
+		setTitleText(sndt);
+		setFileText(sndf);
+	}
+
+
+}
+
 
 void SPushButton::updateExit(int exitCode)
 {

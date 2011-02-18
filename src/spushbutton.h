@@ -52,6 +52,7 @@ public:
     QString m_sndtt;
     QString m_sndtt_key;
     QString m_procid; // used to stop a file playing.
+    QString m_butid; // button id - try to use for loading config while running
     bool m_playb;
     bool m_sndloop;
     QWidget m_parent;
@@ -64,11 +65,13 @@ public:
     void setSndt(const QString&);
     void setSndtKey(const QString&);
     void setProcId(const QString&);
+    void setButId(const QString&);
     void setPlayb(const bool&);
     void setSndLoop(const bool&);
     QString getSndf();
     QString getSndt();
     QString getProcId();
+    QString getButId();
     
 private:
 
@@ -82,6 +85,7 @@ public slots:
    void setTitleText(QString title);
    void setFileText(QString title);
    void updateExit(int exitCode);
+   void updateButConfig(QString butid, QString sndt, QString sndf);
 
 
 private slots:
