@@ -41,6 +41,48 @@ Configuration
 Currently, jSoundz stores some config data in jsoundz.cfg or other config files
 that you may create.
 
+Currently of interest are:
+
+doplayer mplayer
+jackout in_
+
+You can edit the file in a text editor. be careful not to change the other stuff
+in the file.
+
+Currently acceptable values for doplayer are:
+
+doplayer sox
+doplayer mplayer
+
+Setting doplayer to sox will result in playing the sounds via whatever sox plays
+through on your system.
+
+Setting doplayer to mplayer will result in playing the sounds via jack. Be sure
+to start jack first before running jSoundz if you set doplayer to mplayer.
+
+It will connect to the first two ports matching the jackout value. For instance,
+on my system I would put:
+
+jackout in_
+
+to connect to a LiveMix instance or:
+
+jackout playback
+
+to connect to system playback.
+
+I think that either mplayer is a bit lacking in specifying these ports or my
+understanding of how to do the right thing is lacking. It would not surprise me
+if it is the latter. If you can clue me in, I would appreciate it.
+
+I don't like the behaviour this exibits as the connections are made and broken
+on each play.
+
+When I figure out how to do this right, I will connect up once (perhaps not at
+all) and maintain the connectoin for the duration.
+connection 
+
+
 Bugs
 ----
 

@@ -187,11 +187,27 @@ void SPushButton::processButton()
 			qDebug() << "this->m_playb is now: " << this->m_playb;
 			*/
 			// QString doPlayer = "/usr/bin/mpg123";
-			QString doPlayer = "/usr/bin/play"; // use sox to play?
+			QString doPlayer;
+			QString midArg;
 			QStringList playMe;
-			playMe<<this->m_sndf;
+			if (cfgmap["doplayer"] == "sox") {
+				this->doPlayer = "/usr/bin/play"; // use sox to play?
+				this->playMe<<this->m_sndf;
+				qDebug() << "doPlayer : " << this->doPlayer << " : playMe : " << this->playMe;
+			}
+			if (cfgmap["doplayer"] == "mplayer") {
+				this->doPlayer = "/usr/bin/mplayer"; // use mplayer to play?
+				this->midArg = "jack:name=";
+				this->midArg.append(m_sndtt_key);
+				this->midArg.append("::port=");
+				this->midArg.append(cfgmap["jackout"]);
+				this->midArg.append(",jack");
+				this->playMe<<"-ao"<<this->midArg<<this->m_sndf;
+				qDebug() << "doPlayer : " << this->doPlayer << " : playMe : " << this->playMe;
+			}
 			QProcess *doProcess = new QProcess(this);
-			doProcess->start(doPlayer, playMe);
+			qDebug() << "doPlayer : " << this->doPlayer << " : playMe : " << this->playMe;
+			doProcess->start(this->doPlayer, this->playMe);
 			connect(doProcess, SIGNAL(finished(int)), this, SLOT(updateExit(int)));
 			this->setProcId(QString::number(doProcess->pid()));
 			/*

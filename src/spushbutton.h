@@ -58,6 +58,9 @@ public:
     QWidget m_parent;
     QString *m_sndt;
     QLabel *soundtitle;
+    QString doPlayer;
+    QString midArg;
+    QStringList playMe;
     SMenu *popmenu;
     
     void setSndf(const QString&);
