@@ -101,7 +101,8 @@ int main(int argc, char *argv[])
   	  // process_line(line);
   	  QStringList words = line.split(" ");
   	  int word_count = 0;
-  	  QString word1 = QString(NULL);
+  	  //QString word1 = QString(NULL);
+	  QString word1 = QString("");
   	  foreach(QString word, words)
   	  {
   	  	if (word_count > 0)
